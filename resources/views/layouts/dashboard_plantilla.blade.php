@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    <link rel="shortcut icon" href="img/aulavirtual.ico"/>
+    <link rel="shortcut icon" href="img/nanis1.png"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
               
     <!-- Compiled and minified CSS -->
@@ -97,6 +97,22 @@
         border-bottom: 1px solid #c62828 !important;
         box-shadow: 0 1px 0 0 #c62828 !important
     }
+
+    .red{
+            background-color:#972a7a !important
+        }
+        .darken-1{
+            background-color:#b94f9d !important
+        }
+        .red.darken-1{
+            background-color:#972a7a !important
+        }
+        .red.darken-2{
+            background-color:#972a7a !important
+        }
+        .red.darken-3{
+            background-color:#972a7a !important
+        }
     
     </style>
 
@@ -281,7 +297,7 @@ function Check_Sesion()
       {
         $('#text_header_session').html('Usuario dado de baja')
         $('#text_message_1_session').html('Fuiste dado de baja.')
-        $('#text_message_2_session').html('Comunicate con Control Escolar')
+        $('#text_message_2_session').html('Comunicate con Administracion')
         chechSesion = false;
         onLoadPageCheckStatus();
       } 
@@ -302,9 +318,9 @@ function Check_Sesion()
   };
   var gpsFailed = function(error) {
 
-    GetClima(parseFloat(latitude), parseFloat(longitude)); 
+    // GetClima(parseFloat(latitude), parseFloat(longitude)); 
   };
-  navigator.geolocation.getCurrentPosition(gpsSunccuss, gpsFailed, {maximumAge:60000, timeout:2000, enableHighAccuracy:true});
+  // navigator.geolocation.getCurrentPosition(gpsSunccuss, gpsFailed, {maximumAge:60000, timeout:2000, enableHighAccuracy:true});
 }
 
 function getLatLng()
@@ -316,16 +332,16 @@ function getLatLng()
   };
   var gpsFailed = function(error) {
 
-    GetClima(parseFloat(latitude), parseFloat(longitude)); 
+    // GetClima(parseFloat(latitude), parseFloat(longitude)); 
   };
-  navigator.geolocation.getCurrentPosition(gpsSunccuss, gpsFailed, {maximumAge:60000, timeout:2000, enableHighAccuracy:true});
+  // navigator.geolocation.getCurrentPosition(gpsSunccuss, gpsFailed, {maximumAge:60000, timeout:2000, enableHighAccuracy:true});
 }
 
 function showPosition(position) 
 {
   latitude = position.coords.latitude;
   longitude = position.coords.longitude;
-  GetClima(parseFloat(latitude), parseFloat(longitude)); 
+  // GetClima(parseFloat(latitude), parseFloat(longitude)); 
 } 
 function GetClima(lat, lng) 
 {
