@@ -11,7 +11,7 @@ use App\Mail\NewAlumnoMail;
 use Illuminate\Filesystem\Cache;
 use Illuminate\Support\Facades\Artisan;
 
-class SearchOrdenesController extends Controller
+class SearchUsuariosController extends Controller
 {
     public function index()
     {
@@ -42,6 +42,6 @@ class SearchOrdenesController extends Controller
     }
     public function addModal()
     {
-        return view('vistas.subvistas_dashboard.nanis.modal_add_ordens');
+        return view('vistas.subvistas_dashboard.nanis.modal_add_usuarios');
     } 
 }

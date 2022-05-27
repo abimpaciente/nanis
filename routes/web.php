@@ -14,6 +14,8 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ViewDashboardController;
 use App\Http\Controllers\ViewPanelControlController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\nanis\SearchOrdenesController;
+use App\Http\Controllers\nanis\SearchUsuariosController;
 
 Route::get('/', function () {
     return view('index');
@@ -29,7 +31,14 @@ Route::resource('panel_control', ViewPanelControlController::class);
 Route::resource('views', ViewDashboardController::class);
 
 //Search Ordenes Views
-Route::post('ordenes_search', [SearchOrdenesController::class, 'autosearch'])->name('ordenes_search');
+Route::post('ordens_search', [SearchOrdenesController::class, 'autosearch'])->name('ordens_search');
+Route::post('ordens_addmodal', [SearchOrdenesController::class, 'addModal'])->name('ordens_addmodal');
+Route::resource('ordens_insert', SearchOrdenesController::class);
+
+//Search Usuarios Views
+Route::post('usuarios_search', [SearchUsuariosController::class, 'autosearch'])->name('usuarios_search');
+Route::post('usuarios_addmodal', [SearchUsuariosController::class, 'addModal'])->name('usuarios_addmodal');
+Route::resource('usuarios_insert', SearchUsuariosController::class);
 
 //Search Alumnos Views
 Route::post('alumnos_search', [SearchAlumnosController::class, 'autosearch'])->name('alumnos_search');

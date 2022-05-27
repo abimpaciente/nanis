@@ -18,6 +18,15 @@
             color:red;
             font-weight: bold;
         }
+        .red{
+            background-color:#972a7a !important
+        }
+        .darken-1{
+            background-color:#b94f9d !important
+        }
+        .red.darken-1{
+            background-color:#972a7a !important
+        }
     </style>
 </head>
 <body style="background:   #cccccc  ;">

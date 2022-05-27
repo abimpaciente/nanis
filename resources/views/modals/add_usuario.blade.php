@@ -1,52 +1,132 @@
-<div id="bajaalumno" class="modal">
+<div id="addusuario" class="modal modal-fixed-footer">
+  <div class="modal-header red darken-3 center-align" style="color:white;"><h4>Agregar Usuario</h4></div>
+
     <div class="modal-content">
-      <h4>Baja</h4>
-      <meta name="csrf-token-baja" content="{{ csrf_token() }}">
-      <p class="flow-text">Quieres dar de baja esta orden?</p>
+      <meta name="csrf-token-modal_usuario_add" content="{{ csrf_token() }}">   
+      <div class="row" id="content_add_usuario_modal">
+            
+          
+        
+      </div>
     </div>
     <div class="modal-footer">
         <a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-        <a class="modal-close waves-effect waves-green btn-flat" onclick="bajaAlumno('{{route('alumnos_change_status')}}', '0')">Dar baja</a>
+        <a class="modal-close waves-effect waves-green btn-flat" onclick="InsertUsuario('{{route('usuarios_insert.store')}}')">Guardar</a>
     </div>
   </div>
+  <style>
+    #toast-container {
+        min-width: 10%;
+        top: 80%;
+        right: 50%;
+        transform: translateX(50%) translateY(50%);
+    }
+</style>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.modal');
 });
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, options);
-  });
-// Or with jQuery
-
-$(document).ready(function(){
-  $('.modal').modal();
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, options);
 });
 
-function downOutAlumno(id){
-  id_alumno = id;
-}
-function bajaAlumno(url, status){
-    if(url!='')
-    {
-      var data = {"_token": $("meta[name='csrf-token-baja']").attr("content"),
-      'id':id_alumno, 
-      'status':status};
-      
-      $.ajax({
-          url:url,
-          type:'POST',
-          data:data,
-          dataType: 'html',
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.datepicker');
+  var instances = M.Datepicker.init(elems, options);
+});
+
+  // Or with jQuery
+
+$(document).ready(function(){
+  $('.datepicker').datepicker({
+    "format":'yyyy-mm-dd',
+    container: 'body' //this will append to body
+  });
+  $('.modal').modal();
+  $('select').formSelect();
+});
+// Or with jQuery
+
+  function AddUsuario(){
+
+    var data = new FormData();
+    data.append('_token', $("meta[name='csrf-token-modal_usuario_add']").attr("content"));
+
+
+    $.ajax({
+        url:'{{route('usuarios_addmodal')}}',
+        type:'POST',
+        contentType:false,
+        data:data,
+        dataType: "html",
+        processData:false,
+        cache:false,
         beforeSend: function(){
-          $('#loading-overlay').css({'width': '0%', 'background':'#EF0000'});
-          $('#loading-overlay-text').html('');
           onLoad()
         },
         error: function(request, status, error)
         {
-          $('#loading-overlay').css({'width': '0%', 'background':'#EF0000'});
-          $('#loading-overlay-text').html('');
+          offLoad()
+        console.log(request);
+        },
+        success:function (data) {
+            $('#content_add_usuario_modal').html(data)
+            offLoad()
+        },
+        complete: function (XMLHttpRequest, textStatus) {
+            var headers = XMLHttpRequest.getAllResponseHeaders();
+        }
+    }) 
+  } 
+
+
+
+function InsertUsuario(url){
+    if(url!='')
+    {
+      
+      var nombre = $('#first_name_text').val();
+      var apellidoP = $('#last_name_text').val();
+      var apellidoM = $('#other_last_name_text').val();
+      var carrera = $('#selectCarrera').val();
+      var email = $('#email_text').val();
+      var password = $('#password').val();
+      var telefono = $('#phone').val();
+      var fecha_ingreso = $('#fecha_ingreso').val();
+      var fecha_nacimiento = $('#fecha_nacimiento').val();
+
+      var data = new FormData();
+      if(document.getElementById('file-input2').value!=''){
+        var inputFileImage = document.getElementById('file-input2');
+        var fileFoto = inputFileImage.files[0];
+        data.append('foto', fileFoto);
+      }
+
+      data.append('_token', $("meta[name='csrf-token']").attr("content"));
+      data.append('nombre',nombre);
+      data.append('apellidoP',apellidoP);
+      data.append('apellidoM',apellidoM);
+      data.append('carrera',carrera);
+      data.append('email',email);
+      data.append('password',password);
+      data.append('telefono',telefono);
+      data.append('fecha_ingreso',fecha_ingreso);
+      data.append('fecha_nacimiento',fecha_nacimiento);
+      
+      $.ajax({
+          url:url,
+          type:'POST',
+          contentType:false,
+          data:data,
+          dataType: "html",
+          processData:false,
+          cache:false,
+        beforeSend: function(){
+          onLoad()
+        },
+        error: function(request, status, error)
+        {
           offLoad()
           console.log(error);
         },
@@ -107,27 +187,23 @@ function bajaAlumno(url, status){
             {
                 var percentComplete = Math.round( (progress.loaded * 100) / progress.total );
                 var percentage = Math.floor((progress.total / progress.totalSize) * 100);
-                /* console.log('progress', percentComplete);
-                console.log('progress', progress); */
+                /* console.log('progress', percentComplete);console.log('progress', progress); */
                 if (percentage === 100)
                 {
-                   /*   */
                 }
             }
         }, 
         success: function(data)
         {
-          /* console.log('progress', data);  */
+          //console.log('progress', data);
           $('#loading-overlay').css({'width': '0%', 'background':'#EF0000'});
           $('#loading-overlay-text').html('');
           M.toast({html: data, outDuration: 300})
-          searchAlumnos('{{ route('alumnos_search') }}', '') 
+          searchUsuarios('{{ route('usuarios_search') }}', '') 
           offLoad()
         },
         complete: function (XMLHttpRequest, textStatus) {
             var headers = XMLHttpRequest.getAllResponseHeaders();
-            id_alumno = "";
-           /*  console.log('headers', headers); */
         }
         });
     }else{
@@ -135,4 +211,5 @@ function bajaAlumno(url, status){
       M.toast({html: 'Vista en fabricación', outDuration: 300})
     }      
   }
+
 </script>

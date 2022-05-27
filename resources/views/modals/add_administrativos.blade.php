@@ -1,6 +1,7 @@
 <div id="addadministrativo" class="modal">
+    <div class="modal-header red darken-3 center-align" style="color:white;">
+      <h4>Agregar Administrativo</h4></div>
     <div class="modal-content">
-      <h4>Agregar Administrativo</h4>
       <div class="row">
         <form class="col s12">
           <div class="row">
@@ -17,17 +18,6 @@
               <label for="other_last_name">Apellido Materno</label>
             </div>
           </div>          
-          <div class="row">
-            <div class="input-field col s12">
-              <select>
-                <option value="" disabled selected>Elige una carrera</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-              <label>Carrera</label>
-            </div>
-          </div>
           <div class="row">
             <div class="input-field col s12">
               <input id="email" type="email" class="validate">

@@ -73,7 +73,7 @@ class ViewDashboardController extends Controller
                     return $this->CheckSession();
                 break;
                 case 'check_wheater':
-                    return $this->getClima($request);
+                    // return $this->getClima($request);
                 break;
             }
         }else{

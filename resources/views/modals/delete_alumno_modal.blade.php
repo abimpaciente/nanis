@@ -1,7 +1,7 @@
 <div id="deletealumno" class="modal">
     <div class="modal-content">
       <h4>Eliminar</h4>
-      <p class="flow-text">¿Quieres eliminar este alumno?</p>
+      <p class="flow-text">¿Quieres eliminar esta orden?</p>
     </div>
     <div class="modal-footer">
         <a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>

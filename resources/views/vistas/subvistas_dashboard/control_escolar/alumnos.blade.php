@@ -15,19 +15,24 @@
     justify-content: center;
     align-items: center;">
         <div class="col s6 m6 l6">
-            <p class="flow-text" style="font-size: 35px;">Alumnos</p>
-            <p class="flow-text" style="color: rgb(126, 126, 126)"><small>Encuentra los alumnos registrados.</small></p>
+            <p class="flow-text" style="font-size: 35px;"><?php echo $orden ?></p>
+            <p class="flow-text" style="color: rgb(126, 126, 126)"><small>Encuentra los ordenes <?php echo $orden ?>.</small></p>
         </div>
         <div class="col s6 m6 l6 right-align">
-            <a class="tooltipped btn-floating btn-large waves-effect waves-light green darken-1" data-position="left" data-tooltip="Descargar concentrado alumnos" onclick="exportExcel()" style="margin:15px;"><i class="material-icons">table_view</i></a>
-            <a class="tooltipped btn-floating btn-large modal-trigger waves-effect waves-light red" data-position="left" data-tooltip="Agregar nuevo alumno" href="#addalumno" onclick="AddAlumno()"><i class="material-icons">add</i></a>
+            <?php
+            if ($orden=='En curso') {
+            ?>
+                <a class="tooltipped btn-floating btn-large modal-trigger waves-effect waves-light red" data-position="left" data-tooltip="Agregar nueva orden" href="#addalumno" onclick="AddAlumno()"><i class="material-icons">add</i></a>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>
 
 <div class="col s12">
     <div class="row" style="background: white; border-radius: 5px; box-shadow: 0px 1px 1px 1px  #c2c2c2; padding:10px;">
-      <p class="flow-text">Alumnos registrado</p>
+      <p class="flow-text"><?php echo "Ordenes " . $orden ?></p>
         <div class="col s12">
             <div class="row">
                 <div class="input-field col s12 m12 l12">
@@ -43,17 +48,17 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Matrícula</th>
+                        <!-- <th>Matrícula</th> -->
                         <th>Nombre</th>
                         <th>Correo</th>
-                        <th>Carrera</th>
+                        <!-- <th>Carrera</th> -->
                         <th>Teléfono</th>
                         <th>Fecha Nacimiento</th>
-                        <th>Fecha Ingreso</th>
+                        <!-- <th>Fecha Ingreso</th> -->
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th>Kardex</th>
+                        <!-- <th>Kardex</th> -->
                         <th>Status</th>
                     </tr>
                     </thead>
@@ -62,21 +67,12 @@
                         @foreach ($alumnos as $alumno)
                         <tr>
                             <td></td>
-                            <td style="font-weight: bold">{{$alumno->matricula}}</td>
+                            <!-- <td style="font-weight: bold">{{$alumno->matricula}}</td> -->
                             <td>{{$alumno->nombre." ".$alumno->apellidoP." ".$alumno->apellidoM}}</td>
                             <td>{{$alumno->correo}}</td>
-                            @foreach ($carreras as $carrera)
-                            <?php
-                            if ($carrera->id==$alumno->id_carrera) {
-                            ?>
-                            <td>{{$carrera->nombre_carrera}}</td>
-                            <?php
-                            }
-                            ?>
-                            @endforeach
                             <td>{{$alumno->telefono}}</td>
                             <td>{{$alumno->fecha_nacimiento}}</td>
-                            <td>{{$alumno->fecha_ingreso}}</td>
+                            <!-- <td>{{$alumno->fecha_ingreso}}</td> -->
 
                             <td><a class="tooltipped waves-effect waves-light btn-small modal-trigger light-blue darken-1" href="#editalumno" onclick="EditAlumno('{{$alumno->id}}')" data-position="bottom" data-tooltip="Editar" data-outDuration="50"><i class="material-icons">edit</i></a></td>
                             <td><a class="tooltipped waves-effect waves-light btn-small modal-trigger red darken-2" href="#deletealumno" onclick="eliminarAlumno('{{$alumno->id}}')" data-position="bottom" data-tooltip="Eliminar"><i class="material-icons">delete</i></a></td>
@@ -93,7 +89,7 @@
                             }
                             ?>
                             </td>
-                            <td><a class="tooltipped btn waves-effect waves-light red darken-4 btn-small"  onclick="getPDF('{{$alumno->id}}', '{{$alumno->matricula}}')" data-position="left" data-tooltip="Descargar Kardex"><i class="material-icons center">picture_as_pdf</i></a></td>
+                            <!-- <td><a class="tooltipped btn waves-effect waves-light red darken-4 btn-small"  onclick="getPDF('{{$alumno->id}}', '{{$alumno->matricula}}')" data-position="left" data-tooltip="Descargar Kardex"><i class="material-icons center">picture_as_pdf</i></a></td> -->
                             <td>
                                 <?php
                                 if ($alumno->status=='1') {

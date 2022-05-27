@@ -1,39 +1,4 @@
 @foreach ($alumnos as $alumno)
-<div class="col s12 center-align">
-  <input id="foto_front" type="file" accept="image/*" style="display: none;" />
-  <div class="image-upload_update">
-    <label for="file-input2_update">
-      
-      <style type="text/css">
-        .image-upload_update>input 
-        {
-          display: none;
-        }
-        #foto_front_img_update
-        {
-          object-fit: cover;
-          width:200px;
-          height:200px;
-          border-radius: 200px;
-          margin-bottom:20px;
-          cursor: pointer;
-        }
-        </style>
-        <?php 
-        if ($alumno->foto!='') {
-          ?>
-          <img class="circle" src="{{$alumno->foto}}?q=<?php echo microtime(); ?>" width="200px" style="cursor: pointer"  id="foto_front_img_update"/>
-          <?php
-        }else{
-          ?>
-          <img class="circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeeUl9IZDN97pBQNgeunx6dD1df-4g7vkPFw&usqp=CAU" width="200px" style="cursor: pointer"  id="foto_front_img_update"/>
-          <?php
-        }
-        ?>
-  </label>
-    <input id="file-input2_update" type="file" accept="image/*" onchange="PreviewGaleryUpdate(event)" />
-  </div>
-</div>
 <script>
 var PreviewGaleryUpdate = function(event) 
 {
@@ -103,27 +68,6 @@ return blob;
   <div class="input-field col s12 m12 l4">
     <input id="other_last_name_text_update" type="text" name="text" class="validate" value="{{$alumno->apellidoM}}" onkeyup="capitalizarLetter(this.value, this)">
     <label for="other_last_name_text_update">Apellido Materno</label>
-  </div>
-  <div class="input-field col s12">
-    <select id="selectCarrera_update">
-      <option value="" disabled selected>Elige una carrera</option>
-      @foreach ($carreras as $carrera)
-
-      <?php 
-      if ($alumno->id_carrera==$carrera->id) {
-        ?>
-        <option value="{{$carrera->id}}" selected>{{$carrera->nombre_carrera}}</option>
-        <?php
-      }else{
-        ?>
-        <option value="{{$carrera->id}}">{{$carrera->nombre_carrera}}</option>
-        <?php
-      }
-      ?>
-      
-      @endforeach  
-    </select>
-    <label>Carrera</label>
   </div>
   <div class="input-field col s12">
     <input id="email_text_update" type="email" class="validate" name="text" value="{{$alumno->correo}}">

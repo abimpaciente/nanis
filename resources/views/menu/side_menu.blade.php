@@ -12,8 +12,7 @@
           </li>
           <li><font id="hora-responsive"></font></li>
           <li><a  class="tooltipped" onclick="ViewMenu('inicio')"  data-position="bottom" data-tooltip="Inicio"><i class="material-icons">home</i></a></li>
-          <li><a  class="tooltipped" onclick="ViewMenu('notificaciones')"  data-position="bottom" data-tooltip="Notificaciones"><i class="material-icons">notifications</i></a></li>
-          <li><a  class="tooltipped" onclick="ViewMenu('mis_cursos')"  data-position="bottom" data-tooltip="Mis Cursos"><i class="material-icons">work</i></a></li>
+          <!-- <li><a  class="tooltipped" onclick="ViewMenu('notificaciones')"  data-position="bottom" data-tooltip="Notificaciones"><i class="material-icons">notifications</i></a></li> -->
           <li><a   data-target="modal1" class="tooltipped modal-trigger" href=""  data-position="left" data-tooltip="Cerrar Sesión"><i class="material-icons">exit_to_app</i></a></li>
 
           
@@ -29,8 +28,7 @@
                 {{-- <i class="material-icons">favorite_border</i> --}}
             </div>
             <a href=""><img class="circle" src="{{session('foto')}}"></a>
-            <a ><span class="black-text text-darken-2">Hola {{session('nombre')}}, bienvenido a tu aula virtual.</span></a>
-            <!--<a href="#email"><span class="black-text email">jdandturk@gmail.com</span></a>-->
+            <a ><span class="black-text text-darken-2">Hola {{session('nombre')}}.</span></a>
         </div>
     </li>
     <li>
@@ -40,7 +38,7 @@
         <div class="divider"></div>
     </li>
     <li>
-        <a onclick="ViewMenu('ordenes')" style="cursor: pointer;"><i class="material-icons">shopping_cart</i>Ordenes</a>
+        <a onclick="ViewMenu('ordenes')" style="cursor: pointer;"><i class="material-icons">shopping_cart</i>Servicios</a>
     </li>
     <li>
       <div class="divider"></div>
@@ -68,8 +66,11 @@
     </li>
     <li>
       <div class="divider"></div>
-    <!-- </li>
+    </li>
     <li>
+        <!-- <a onclick="ViewMenu('control_escolar')" style="cursor: pointer;"><i class="material-icons">school</i>Control Escolar</a> -->
+    </li> 
+    <!-- <li>
         <a onclick="ViewMenu('biblioteca_digital')" style="cursor: pointer;"><i class="material-icons">library_books</i>CID (Biblioteca Digital)</a>
     </li>
     <li>

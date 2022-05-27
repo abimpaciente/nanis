@@ -1,6 +1,6 @@
 
 <div id="editalumno" class="modal modal-fixed-footer modal-fixed-header">
-    <div class="modal-header red darken-3 center-align" style="color:white;"><h4>Editar Alumno</h4> </div>
+    <div class="modal-header red darken-3 center-align" style="color:white;"><h4>Editar Orden</h4> </div>
     <div class="modal-content">        
       <meta name="csrf-token-modal_alumno_edit" content="{{ csrf_token() }}">   
       <div class="row" id="content_edit_alumno_modal">         

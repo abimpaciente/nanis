@@ -58,15 +58,23 @@ function b64toBlob(b64Data, contentType, sliceSize)
 
   <div class="input-field col s12 m12 l4">
     <input id="first_name_text" type="text" class="validate" onkeyup="capitalizarLetter(this.value, this)">
-    <label for="first_name_text">Nombre(s)</label>
+    <label for="first_name_text">De(s)</label>
   </div>
   <div class="input-field col s12 m12 l4">
     <input id="last_name_text" type="text" class="validate" onkeyup="capitalizarLetter(this.value, this)">
-    <label for="last_name_text">Apellido Parteno</label>
+    <label for="last_name_text">Para</label>
   </div>
   <div class="input-field col s12 m12 l4">
     <input id="other_last_name_text" type="text" class="validate" onkeyup="capitalizarLetter(this.value, this)">
-    <label for="other_last_name_text">Apellido Materno</label>
+    <label for="other_last_name_text">De a como</label>
+  </div>
+  <div class="input-field col s12">
+    <select id="selectGenero">
+      <label>Género</label>
+        <option value="" disabled selected>Seleccione Nani</option>
+        <option value="1">Uno</option>
+        <option value="2">Dos</option>
+      </select>
   </div>
   <div class="input-field col s12">
     <input id="email_text" type="email" class="validate">
@@ -111,7 +119,5 @@ $(document).ready(function(){
       });
   });
 
-
-
-
+  
     </script>

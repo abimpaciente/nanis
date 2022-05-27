@@ -26,8 +26,17 @@ class ViewControlEscolarController extends Controller
                 case 'docentes':
                     return $this->Docentes();
                 break;
-                case 'alumnos':
-                    return $this->Alumnos();
+                case 'curso':
+                    return $this->Alumnos("En curso");
+                break;
+                case 'realizadas':
+                    return $this->Alumnos("Realizadas");
+                break;
+                case 'canceladas':
+                    return $this->Alumnos("Canceladas");
+                break;
+                case 'agendadas':
+                    return $this->Alumnos("Agendadas");
                 break;
                 case 'administrativos':
                     return $this->Administrativos();
@@ -35,6 +44,13 @@ class ViewControlEscolarController extends Controller
                 case 'control_escolar':
                     return $this->ControlEscolar();
                 break;
+                case 'settings':
+                    return $this->ForoControlEscolar();
+                break;
+                case 'empleados':
+                    return $this->Administrativos();
+                break;
+                
 
                 //Subvistas de Control Escolar
                 case 'biblioteca_digital_control_escolar':
@@ -80,13 +96,14 @@ class ViewControlEscolarController extends Controller
         return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
     }
 
-    public function Alumnos()
+    public function Alumnos(String $status)
     {
         if(session('authenticated')){
 
             $alumnos = Usuario::join('alumnos', 'usuario.id', '=', 'alumnos.id')->orderBy('status', 'desc')->orderBy('alumnos.fecha_ingreso', 'desc')->get();
             $carreras = Carrera::get();
-            return view('vistas.subvistas_dashboard.control_escolar.alumnos', compact('alumnos'), compact('carreras'));
+            $orden = $status;
+            return view('vistas.subvistas_dashboard.control_escolar.alumnos',compact('orden'), compact('alumnos'), compact('carreras'));
         }
         return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
     }

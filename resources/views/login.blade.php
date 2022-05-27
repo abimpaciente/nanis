@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="shortcut icon" href="img/aulavirtual.ico"/>
+    <link rel="shortcut icon" href="img/nanis1.png"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
               
     <!-- Compiled and minified CSS -->
@@ -20,6 +20,16 @@
             right: 50%;
             transform: translateX(50%) translateY(50%);
         }
+        .red{
+            background-color:#972a7a !important
+        }
+        .darken-1{
+            background-color:#b94f9d !important
+        }
+        .red.darken-1{
+            background-color:#972a7a !important
+        }
+    
     </style>
     <script type="text/javascript">
      /* var verifyCallback = function(response) {
