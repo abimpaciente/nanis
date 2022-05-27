@@ -183,7 +183,7 @@
   <script>
    $(document).ready(function(){
     $('.tabs').tabs();
-    ViewControlEscolar('alumnos', 'test-swipe-1');
+    ViewControlEscolar('curso', 'test-swipe-1');
   });
    </script>
 
