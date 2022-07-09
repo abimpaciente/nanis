@@ -23,6 +23,9 @@ class ViewControlEscolarController extends Controller
         if(session('authenticated')){
             switch ($request->view) 
             {
+                case 'alumnos':
+                    return $this->Alumnos("En curso");
+                break;
                 case 'docentes':
                     return $this->Docentes();
                 break;

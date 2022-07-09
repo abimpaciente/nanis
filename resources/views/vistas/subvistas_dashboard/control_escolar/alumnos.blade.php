@@ -337,7 +337,6 @@
         return str.split(/\s+/).map( s => s.charAt( 0 ).toUpperCase() + s.substring(1).toLowerCase() ).join( " " );
     }
     </script>
-@include('modals.add_alumno')
 @include('modals.edit_alumno')
 @include('modals.delete_alumno_modal')
 @include('modals.baja_alumno_modal')

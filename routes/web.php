@@ -31,14 +31,25 @@ Route::resource('panel_control', ViewPanelControlController::class);
 Route::resource('views', ViewDashboardController::class);
 
 //Search Ordenes Views
+Route::resource('servicios', SearchOrdenesController::class);
+Route::post('servicios_search', [SearchOrdenesController::class, 'autosearch'])->name('servicios_search');
 Route::post('ordens_search', [SearchOrdenesController::class, 'autosearch'])->name('ordens_search');
 Route::post('ordens_addmodal', [SearchOrdenesController::class, 'addModal'])->name('ordens_addmodal');
+Route::post('servicios_addmodal', [SearchOrdenesController::class, 'addModal'])->name('servicios_addmodal');
+Route::post('servicios_update', [SearchOrdenesController::class, 'changeStatus'])->name('servicios_update');
+Route::post('servicios_editmodal', [SearchOrdenesController::class, 'editModal'])->name('servicios_editmodal');
 Route::resource('ordens_insert', SearchOrdenesController::class);
 
 //Search Usuarios Views
 Route::post('usuarios_search', [SearchUsuariosController::class, 'autosearch'])->name('usuarios_search');
 Route::post('usuarios_addmodal', [SearchUsuariosController::class, 'addModal'])->name('usuarios_addmodal');
-Route::resource('usuarios_insert', SearchUsuariosController::class);
+Route::resource('promos_insert', SearchUsuariosController::class);
+Route::post('usuarios_change_status', [SearchUsuariosController::class, 'changeStatus'])->name('usuarios_change_status');
+Route::post('promo_change_status', [SearchUsuariosController::class, 'changeStatusPromo'])->name('promos_change_status');
+Route::post('promos_search', [SearchUsuariosController::class, 'promoAutoSearch'])->name('promos_search');
+Route::post('promos_update', [SearchUsuariosController::class, 'promoEdit'])->name('promos_update');
+Route::post('promos_editmodal', [SearchUsuariosController::class, 'editModalPromo'])->name('promos_editmodal');
+Route::post('promos_addmodal', [SearchUsuariosController::class, 'addModalPromo'])->name('promos_addmodal');
 
 //Search Alumnos Views
 Route::post('alumnos_search', [SearchAlumnosController::class, 'autosearch'])->name('alumnos_search');

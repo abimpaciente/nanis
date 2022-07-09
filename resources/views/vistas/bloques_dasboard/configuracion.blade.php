@@ -165,25 +165,25 @@
 <meta name="csrf-token-control_escolar" content="{{ csrf_token() }}">
 
 <ul id="tabOrdenes" class="tabs tabs-fixed tab-demo z-depth-1" style="">
-    <li class="tab col s6"><a class="active red-text text-darken-4" href="#test-swipe-1" onclick="ViewControlEscolar('settings', 'test-swipe-1')">Settings</a></li>
-    <li class="tab col s6"><a class="red-text text-darken-4" href="#test-swipe-2" onclick="ViewControlEscolar('empleados', 'test-swipe-2')">Empleados</a></li>
+    <li class="tab col s6"><a class="active red-text text-darken-4" href="#control-swipe-1" onclick="ViewConfig('settings', 'control-swipe-1')">Settings</a></li>
+    <li class="tab col s6"><a class="red-text text-darken-4" href="#control-swipe-2" onclick="ViewConfig('empleados', 'control-swipe-2')">Empleados</a></li>
 </ul>
-<div id="test-swipe-1" class="col s12" style="margin-top: 50px;">
+<div id="control-swipe-1" class="col s12" style="margin-top: 50px;">
 </div>
-<div id="test-swipe-2" class="col s12" style="margin-top: 50px;">
+<div id="control-swipe-2" class="col s12" style="margin-top: 50px;">
 </div>
 
 
   <script>
    $(document).ready(function(){
     $('.tabs').tabs();
-    ViewControlEscolar('settings', 'test-swipe-1');
+    ViewConfig('settings', 'control-swipe-1');
   });
    </script>
 
 <script>
 
-function ViewControlEscolar(view, id){
+function ViewConfig(view, id){
 
   if(view!='')
   {

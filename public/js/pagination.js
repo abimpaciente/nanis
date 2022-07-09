@@ -29,6 +29,7 @@ $.fn.pageMe = function(opts){
     var numPages = Math.ceil(numItems/perPage);
     
     $("#total_reg").html("<font style='font-weight:bold;'>"+numItems+"</font> registros en total");
+    $(settings.pagerSelector+"_total_reg").html("<font style='font-weight:bold;'>"+numItems+"</font> registros en total");
 
     pager.data("curr",0);
 

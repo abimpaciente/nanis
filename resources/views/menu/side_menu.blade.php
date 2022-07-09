@@ -2,7 +2,6 @@
 <div class="navbar-fixed">
   <nav class="red darken-3">
       <div class="nav-wrapper">
-      <a class="brand-logo"><img id="img_logo" src="https://gilauto.com/wp-content/uploads/2020/11/pngtree-house-location-icon-png-image_1701248.png" width="50px" style="margin:5px;filter: invert(100%);"></a>
       <a data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
           <li style="border-radius: 5px;display: none; margin-right:20px;padding-right:10px;" id="campoViewClima">
@@ -38,19 +37,25 @@
         <div class="divider"></div>
     </li>
     <li>
+        <a onclick="ViewMenu('promos')" style="cursor: pointer;"><i class="material-icons">paid</i>Promos</a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li>
         <a onclick="ViewMenu('ordenes')" style="cursor: pointer;"><i class="material-icons">shopping_cart</i>Servicios</a>
     </li>
     <li>
       <div class="divider"></div>
     </li>
     <li>
-        <a onclick="ViewMenu('usuarios')" style="cursor: pointer;"><i class="material-icons">group</i>Usuarios</a>
+        <a onclick="ViewMenu('Usuario')" style="cursor: pointer;"><i class="material-icons">group</i>Usuarios</a>
     </li>
     <li>
       <div class="divider"></div>
     </li>
     <li>
-        <a onclick="ViewMenu('nanis')" style="cursor: pointer;"><i class="material-icons">face_retouching_natural</i>Nanis</a>
+        <a onclick="ViewMenu('Nanny')" style="cursor: pointer;"><i class="material-icons">face_retouching_natural</i>Nannys</a>
     </li>
     <li>
       <div class="divider"></div>
@@ -68,7 +73,7 @@
       <div class="divider"></div>
     </li>
     <li>
-        <!-- <a onclick="ViewMenu('control_escolar')" style="cursor: pointer;"><i class="material-icons">school</i>Control Escolar</a> -->
+        <a onclick="ViewMenu('control_escolar')" style="cursor: pointer;"><i class="material-icons">school</i>Control Escolar</a>
     </li> 
     <!-- <li>
         <a onclick="ViewMenu('biblioteca_digital')" style="cursor: pointer;"><i class="material-icons">library_books</i>CID (Biblioteca Digital)</a>

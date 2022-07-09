@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\MisDispositivos;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 
 class ViewDashboardController extends Controller
@@ -26,14 +27,17 @@ class ViewDashboardController extends Controller
                 case 'inicio':
                     return $this->dashboard();
                 break;
+                case 'promos':
+                    return $this->promos($request->view);
+                break;
                 case 'ordenes':
                     return $this->ordenes();
                 break;
-                case 'usuarios':
-                    return $this->usuarios();
+                case 'Usuario':
+                    return $this->usuarios($request->view);
                 break;
-                case 'nanis':
-                    return $this->nanis();
+                case 'Nanny':
+                    return $this->usuarios($request->view);
                 break;
                 case 'servicio_cliente':
                     return $this->servicioCliente();
@@ -111,10 +115,31 @@ class ViewDashboardController extends Controller
         }
         return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
     }
-    public function usuarios()
+    public function usuarios(String $tipo)
     {
         if(session('authenticated')){
-            return view('vistas.bloques_dasboard.usuarios');
+
+
+            $response = Http::Post('http://api.mundomagiconannys.com/get_all_usuarios');
+            if($response->json()['response']){
+                $usuarios = collect($response->json()['data']);
+                $usuarios = $usuarios->whereIn('tipo', $tipo);    
+            }else{
+                $usuarios = [];
+            }
+            return view('vistas.bloques_dasboard.usuarios',compact('tipo'),compact('usuarios'));
+        }
+        return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
+    }
+
+    public function promos(String $tipo)
+    {
+        if(session('authenticated')){
+
+
+            $response = Http::Post('http://api.mundomagiconannys.com/get_all_promos')->collect();
+            $promos = $response;
+            return view('vistas.bloques_dasboard.promos',compact('promos'),compact('tipo'));
         }
         return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
     }

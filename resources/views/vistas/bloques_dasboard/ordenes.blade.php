@@ -164,32 +164,42 @@
   </style>
 <meta name="csrf-token-control_escolar" content="{{ csrf_token() }}">
 
-<ul id="tabOrdenes" class="tabs tabs-fixed tab-demo z-depth-1" style="">
-    <li class="tab col s3"><a class="active red-text text-darken-4" href="#test-swipe-1" onclick="ViewControlEscolar('curso', 'test-swipe-1')">En Curso</a></li>
-    <li class="tab col s3"><a class="red-text text-darken-4" href="#test-swipe-2" onclick="ViewControlEscolar('realizadas', 'test-swipe-2')">Realizadas</a></li>
-    <li class="tab col s3"><a class="red-text text-darken-4" href="#test-swipe-3" onclick="ViewControlEscolar('canceladas', 'test-swipe-3')">Canceladas</a></li>
-    <li class="tab col s3"><a class="red-text text-darken-4" href="#test-swipe-4" onclick="ViewControlEscolar('agendadas', 'test-swipe-4')">Agendadas</a></li>
+<ul id="tabOrdenes" class="tabs tabs-fixed tab-demo z-depth-1 scrollbar-primary"  style="">
+    <li class="tab col s1.9"><a class="active red-text text-darken-4" href="#servicios-swipe-1" onclick="ViewServicios('solicitando', 'servicios-swipe-1')">Solicitando</a></li>
+    <li class="tab col s1.9"><a class="red-text text-darken-4" href="#servicios-swipe-2" onclick="ViewServicios('aceptado', 'servicios-swipe-2')">aceptado</a></li>
+    <li class="tab col s1.9"><a class="red-text text-darken-4" href="#servicios-swipe-3" onclick="ViewServicios('cancelado', 'servicios-swipe-3')">cancelado</a></li>
+    <li class="tab col s1.9"><a class="red-text text-darken-4" href="#servicios-swipe-4" onclick="ViewServicios('en camino', 'servicios-swipe-4')">en camino</a></li>
+    <li class="tab col s1.9"><a class="red-text text-darken-4" href="#servicios-swipe-5" onclick="ViewServicios('prorroga', 'servicios-swipe-5')">prorroga</a></li>
+    <li class="tab col s1.9"><a class="red-text text-darken-4" href="#servicios-swipe-6" onclick="ViewServicios('finalizado', 'servicios-swipe-6')">finalizado</a></li>
+    <li class="tab col s1.9"><a class="red-text text-darken-4" href="#servicios-swipe-7" onclick="ViewServicios('iniciado', 'servicios-swipe-7')">iniciado</a></li>
+    <li class="tab col s1.9"><a class="red-text text-darken-4" href="#servicios-swipe-7" onclick="ViewServicios('help', 'servicios-swipe-7')">Nanny Help</a></li>
 </ul>
-<div id="test-swipe-1" class="col s12" style="margin-top: 50px;">
+<div id="servicios-swipe-1" class="col s12" style="margin-top: 50px;">
 </div>
-<div id="test-swipe-2" class="col s12" style="margin-top: 50px;">
+<div id="servicios-swipe-2" class="col s12" style="margin-top: 50px;">
 </div>
-<div id="test-swipe-3" class="col s12" style="margin-top: 50px;">
+<div id="servicios-swipe-3" class="col s12" style="margin-top: 50px;">
 </div>
-<div id="test-swipe-4" class="col s12" style="margin-top: 50px;">
+<div id="servicios-swipe-4" class="col s12" style="margin-top: 50px;">
+</div>
+<div id="servicios-swipe-5" class="col s12" style="margin-top: 50px;">
+</div>
+<div id="servicios-swipe-6" class="col s12" style="margin-top: 50px;">
+</div>
+<div id="servicios-swipe-7" class="col s12" style="margin-top: 50px;">
 </div>
 
 
   <script>
    $(document).ready(function(){
     $('.tabs').tabs();
-    ViewControlEscolar('curso', 'test-swipe-1');
+    ViewServicios('solicitando', 'servicios-swipe-1');
   });
    </script>
 
 <script>
 
-function ViewControlEscolar(view, id){
+function ViewServicios(view, id){
 
   if(view!='')
   {
@@ -197,7 +207,7 @@ function ViewControlEscolar(view, id){
     data.append('_token', $("meta[name='csrf-token-control_escolar']").attr("content"));
     data.append('view',view);
     $.ajax({
-      url:'{{route('control_escolar.store')}}',
+      url:'{{route('servicios.store')}}',
       type:'POST',
       contentType:false,
       data:data,
@@ -310,3 +320,6 @@ function updateTable(table, id_pager){
   $('.tooltipped').tooltip(); 
 }
 </script>
+
+@include('modals.add_orden')
+@include('modals.edit_orden')

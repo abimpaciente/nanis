@@ -310,3 +310,4 @@ function updateTable(table, id_pager){
   $('.tooltipped').tooltip(); 
 }
 </script>
+@include('modals.add_alumno')
