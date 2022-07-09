@@ -72,9 +72,9 @@
     <li>
       <div class="divider"></div>
     </li>
-    <li>
+    <!-- <li>
         <a onclick="ViewMenu('control_escolar')" style="cursor: pointer;"><i class="material-icons">school</i>Control Escolar</a>
-    </li> 
+    </li>  -->
     <!-- <li>
         <a onclick="ViewMenu('biblioteca_digital')" style="cursor: pointer;"><i class="material-icons">library_books</i>CID (Biblioteca Digital)</a>
     </li>
