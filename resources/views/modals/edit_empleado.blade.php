@@ -1,14 +1,14 @@
-<div id="editpromo" class="modal modal-fixed-footer">
-  <div class="modal-header red darken-3 center-align" style="color:white;"><h4>Editar Promo</h4> </div>
+<div id="editempleado" class="modal modal-fixed-footer">
+  <div class="modal-header red darken-3 center-align" style="color:white;"><h4>Editar Empleado</h4> </div>
   <div class="modal-content">
-    <meta name="csrf-token-modal_promo_edit" content="{{ csrf_token() }}"> 
-    <div class="row" id="content_edit_promo_modal">         
+    <meta name="csrf-token-modal_empleado_edit" content="{{ csrf_token() }}"> 
+    <div class="row" id="content_edit_empleado_modal">         
       
     </div>
   </div>
   <div class="modal-footer">
     <a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-    <a id="btn_editar" class="waves-effect waves-green btn-flat" onclick="updatePromo('{{route('promos_update')}}')">Actualizar</a>
+    <a id="btn_editar" class="waves-effect waves-green btn-flat" onclick="updateEmpleado('{{route('empleados_update')}}')">Actualizar</a>
   </div>
 </div>
 <script>
@@ -26,14 +26,14 @@ $(document).ready(function(){
   $('select').formSelect();
 });
 
-var id_promo = "";
-function EditPromo(id){
-  id_promo = id;
+var id_empleado = "";
+function EditEmpleado(id){
+  id_empleado = id;
   var data = new FormData();
-  data.append('_token', $("meta[name='csrf-token-modal_promo_edit']").attr("content"));
-  data.append('id_promo',id);    
+  data.append('_token', $("meta[name='csrf-token-modal_empleado_edit']").attr("content"));
+  data.append('id_empleado',id);    
   $.ajax({
-    url:'{{route('promos_editmodal')}}',
+    url:'{{route('empleados_editmodal')}}',
     type:'POST',
     contentType:false,
     data:data,
@@ -49,7 +49,7 @@ function EditPromo(id){
     console.log(request);
     },
     success:function (data) {
-        $('#content_edit_promo_modal').html(data)
+        $('#content_edit_empleado_modal').html(data)
         offLoad()
     },
     complete: function (XMLHttpRequest, textStatus) {
@@ -58,58 +58,46 @@ function EditPromo(id){
   }) 
 }   
 
-function updatePromo(url){
+function updateEmpleado(url){
   if(url!='')
   {
       
-      var codigo = $('#codigo_edit_text').val();
-      var descuento = $('#descuento_edit_text').val();
-      var servicio = $('#selectServicio_edit').val();
-      var descripcion = $('#descripcion_edit_text').val();
-      var fecha_inicio = $('#fecha_inicio_edit_text').val();
-      var fecha_fin = $('#fecha_fin_edit_text').val();
+    var usuario = $('#usuario_edit').val();
+      var pass = $('#pass_edit').val();
+      var email = $('#email_edit').val();
+      var tipo = $('#selectTipo_edit').val();
       var message = "";
 
-      if(fecha_fin === ""){
-        message+="fecha fin, ";
-          $('#fecha_fin_edit_text').focus();
+      if(usuario === ""){
+        message+="usuario, ";
+          $('#usuario_edit').focus();
       }
-      if(fecha_inicio === ""){
-        message+="fecha inicio, ";
-          $('#fecha_inicio_edit_text').focus();
+      if(usuario === ""){
+        message+="password, ";
+          $('#pass_edit').focus();
       }
-      if(servicio === null){
-        message+="servicio, ";
+      if(email === ""){
+        message+="correo, ";
+          $('#email_edit').focus();
       }
-      if(descuento === ""){
-        message+="descuento, ";
-          $('#descuento_edit_text').focus();
-      }
-      if(codigo === ""){
-        message+="servicio ";
-          $('#codigo_edit_text').focus();
+      if(tipo === null){
+        message+="tipo, ";
       }
       if(message!==""){
           M.toast({html: "Valida los campos " + message, outDuration: 300});
           return;
       }
 
+      var data = new FormData();
+      data.append('_token', $("meta[name='csrf-token']").attr("content"));
+      data.append('usuario',usuario);
+      data.append('pass',pass);
+      data.append('email',email);
+      data.append('tipo',tipo);
+      
+
       $("#btn_editar").addClass("modal-close");
 
-    var data = new FormData();
-    if(document.getElementById('file-input2_update').value!=''){
-      var inputFileImage = document.getElementById('file-input2_update');
-      var fileFoto = inputFileImage.files[0];
-      data.append('foto', fileFoto);
-    }
-
-    data.append('_token', $("meta[name='csrf-token-edit_promos']").attr("content"));
-      data.append('codigo',codigo);
-      data.append('descuento',descuento);
-      data.append('servicio',servicio);
-      data.append('descripcion',descripcion);
-      data.append('fecha_inicio',fecha_inicio);
-      data.append('fecha_fin',fecha_fin);
     
     $.ajax({
       url:url,
@@ -194,7 +182,7 @@ function updatePromo(url){
         $('#loading-overlay-text').html('');
         M.toast({html: data, outDuration: 300})
       $("#btn_editar").removeClass("modal-close");
-        searchPromos('{{ route('promos_search') }}')
+        searchEmpleados('{{ route('empleados_search') }}')
         offLoad()
       },
       complete: function (XMLHttpRequest, textStatus) {

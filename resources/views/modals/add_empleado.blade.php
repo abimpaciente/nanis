@@ -1,9 +1,9 @@
-<div id="addpromo" class="modal modal-fixed-footer">
-  <div class="modal-header red darken-3 center-align" style="color:white;"><h4>Agregar Promo</h4></div>
+<div id="addempleado" class="modal modal-fixed-footer">
+  <div class="modal-header red darken-3 center-align" style="color:white;"><h4>Agregar Empleado</h4></div>
 
     <div class="modal-content">
-      <meta name="csrf-token-modal_promo_add" content="{{ csrf_token() }}">   
-      <div class="row" id="content_add_promo_modal">
+      <meta name="csrf-token-modal_empleado_add" content="{{ csrf_token() }}">   
+      <div class="row" id="content_add_empleado_modal">
             
           
         
@@ -11,7 +11,7 @@
     </div>
     <div class="modal-footer">
         <a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-        <a id="btn_guardar" class="waves-effect waves-green btn-flat" onclick="InsertPromo('{{route('promos_insert.store')}}')">Guardar</a>
+        <a id="btn_guardar" class="waves-effect waves-green btn-flat" onclick="InsertEmpleado('{{route('empleados_insert')}}')">Guardar</a>
     </div>
   </div>
   <style>
@@ -48,14 +48,14 @@ $(document).ready(function(){
 });
 // Or with jQuery
 
-  function AddPromo(){
+  function AddEmpleado(){
 
     var data = new FormData();
-    data.append('_token', $("meta[name='csrf-token-modal_promo_add']").attr("content"));
+    data.append('_token', $("meta[name='csrf-token-modal_empleado_add']").attr("content"));
 
 
     $.ajax({
-        url:'{{route('promos_addmodal')}}',
+        url:'{{route('empleados_addmodal')}}',
         type:'POST',
         contentType:false,
         data:data,
@@ -71,7 +71,7 @@ $(document).ready(function(){
         console.log(request);
         },
         success:function (data) {
-            $('#content_add_promo_modal').html(data)
+            $('#content_add_empleado_modal').html(data)
             offLoad()
         },
         complete: function (XMLHttpRequest, textStatus) {
@@ -82,36 +82,30 @@ $(document).ready(function(){
 
 
 
-function InsertPromo(url){
+function InsertEmpleado(url){
     if(url!='')
     {
       
-      var codigo = $('#codigo_text').val();
-      var descuento = $('#descuento_text').val();
-      var servicio = $('#selectServicio').val();
-      var descripcion = $('#descripcion_text').val();
-      var fecha_inicio = $('#fecha_inicio').val();
-      var fecha_fin = $('#fecha_fin').val();
+      var usuario = $('#usuario_text').val();
+      var pass = $('#pass_text').val();
+      var email = $('#email_text').val();
+      var tipo = $('#selectTipo').val();
       var message = "";
 
-      if(fecha_fin === ""){
-        message+="fecha fin, ";
-          $('#fecha_fin').focus();
+      if(usuario === ""){
+        message+="usuario, ";
+          $('#usuario_text').focus();
       }
-      if(fecha_inicio === ""){
-        message+="fecha inicio, ";
-          $('#fecha_inicio').focus();
+      if(usuario === ""){
+        message+="password, ";
+          $('#pass_text').focus();
       }
-      if(servicio === null){
-        message+="servicio, ";
+      if(email === ""){
+        message+="correo, ";
+          $('#email_text').focus();
       }
-      if(descuento === ""){
-        message+="descuento, ";
-          $('#descuento_text').focus();
-      }
-      if(codigo === ""){
-        message+="servicio ";
-          $('#codigo_text').focus();
+      if(tipo === null){
+        message+="tipo, ";
       }
       if(message!==""){
           M.toast({html: "Valida los campos " + message, outDuration: 300});
@@ -121,18 +115,11 @@ function InsertPromo(url){
       $( "#btn_guardar" ).addClass("modal-close");
 
       var data = new FormData();
-      if(document.getElementById('file-input2').value!=''){
-        var inputFileImage = document.getElementById('file-input2');
-        var fileFoto = inputFileImage.files[0];
-        data.append('foto', fileFoto);
-      }
       data.append('_token', $("meta[name='csrf-token']").attr("content"));
-      data.append('codigo',codigo);
-      data.append('descuento',descuento);
-      data.append('descripcion',descripcion);
-      data.append('servicio',servicio);
-      data.append('fecha_inicio',fecha_inicio);
-      data.append('fecha_fin',fecha_fin);
+      data.append('usuario',usuario);
+      data.append('pass',pass);
+      data.append('email',email);
+      data.append('tipo',tipo);
       
       $.ajax({
           url:url,
@@ -221,7 +208,7 @@ function InsertPromo(url){
           M.toast({html: data, outDuration: 300})
           $("#btn_guardar").removeClass("modal-close");
 
-          searchPromos('{{ route('promos_search') }}') 
+          searchEmpleados('{{ route('empleados_search') }}') 
           offLoad()
         },
         complete: function (XMLHttpRequest, textStatus) {

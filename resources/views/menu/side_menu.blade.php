@@ -26,7 +26,6 @@
             <div class="background">
                 {{-- <i class="material-icons">favorite_border</i> --}}
             </div>
-            <a href=""><img class="circle" src="{{session('foto')}}"></a>
             <a ><span class="black-text text-darken-2">Hola {{session('nombre')}}.</span></a>
         </div>
     </li>
@@ -36,105 +35,68 @@
     <li>
         <div class="divider"></div>
     </li>
+    <?php
+      if (session('tipo')=='encargado_promos' || session('tipo')=='admin') {
+    ?>
     <li>
         <a onclick="ViewMenu('promos')" style="cursor: pointer;"><i class="material-icons">paid</i>Promos</a>
     </li>
     <li>
         <div class="divider"></div>
-    </li>
+    </li> 
+    <?php
+      }
+      if (session('tipo')=='encargado_servicios' || session('tipo')=='admin') {
+    ?>
     <li>
         <a onclick="ViewMenu('ordenes')" style="cursor: pointer;"><i class="material-icons">shopping_cart</i>Servicios</a>
     </li>
     <li>
       <div class="divider"></div>
     </li>
+    <?php
+      }
+      if (session('tipo')=='encargado_usuarios' || session('tipo')=='admin') {
+    ?>
     <li>
         <a onclick="ViewMenu('Usuario')" style="cursor: pointer;"><i class="material-icons">group</i>Usuarios</a>
     </li>
     <li>
       <div class="divider"></div>
     </li>
+    <?php
+      }
+      if (session('tipo')=='encargado_nannys' || session('tipo')=='admin') {
+    ?>
     <li>
         <a onclick="ViewMenu('Nanny')" style="cursor: pointer;"><i class="material-icons">face_retouching_natural</i>Nannys</a>
     </li>
     <li>
       <div class="divider"></div>
     </li>
+    <?php
+      }
+      if (session('tipo')=='encargado_servicio_cliente' || session('tipo')=='admin') {
+    ?>
     <li>
         <a onclick="ViewMenu('servicio_cliente')" style="cursor: pointer;"><i class="material-icons">forum</i>Servicio al cliente</a>
     </li>
     <li>
       <div class="divider"></div>
     </li>
+    <?php
+      }
+      if (session('tipo')=='admin') {
+    ?>
     <li>
         <a onclick="ViewMenu('configuracion')" style="cursor: pointer;"><i class="material-icons">settings</i>Configuracion</a>
     </li>
     <li>
       <div class="divider"></div>
     </li>
-    <!-- <li>
-        <a onclick="ViewMenu('control_escolar')" style="cursor: pointer;"><i class="material-icons">school</i>Control Escolar</a>
-    </li>  -->
-    <!-- <li>
-        <a onclick="ViewMenu('biblioteca_digital')" style="cursor: pointer;"><i class="material-icons">library_books</i>CID (Biblioteca Digital)</a>
-    </li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li>
-        <a onclick="ViewMenu('panel_control')" style="cursor: pointer;"><i class="material-icons">edit</i>Panel de Control</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-        <a onclick="ViewMenu('calendario')" style="cursor: pointer;"><i class="material-icons">schedule</i>Calendario</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-        <a onclick="ViewMenu('educacion_continua')" style="cursor: pointer;"><i class="material-icons">cast_for_education</i>Educación Continua</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-        <a onclick="ViewMenu('foro')" style="cursor: pointer;"><i class="material-icons">forum</i>Foro</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-        <a onclick="ViewMenu('mis_dispositivos')" style="cursor: pointer;"><i class="material-icons">devices</i>Mis Dispositivos</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-        <a onclick="ViewMenu('notificaciones')" style="cursor: pointer;"><i class="material-icons">notifications</i>Notificaciones</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-        <a onclick="ViewMenu('ayuda')" style="cursor: pointer;"><i class="material-icons">help</i>Ayuda</a>
-    </li>
-   <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-        <a onclick="ViewMenu('control_escolar')" style="cursor: pointer;"><i class="material-icons">school</i>Control Escolar</a>
-    </li> 
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-        <a data-target="modal1" class="modal-trigger"><i class="material-icons">exit_to_app</i>Salir</a>
-    </li> -->
-    <!--<li>
-        <a class="waves-effect" href="#!">Third Link With Waves</a>
-    </li>-->
+    <?php
+      }
+    ?>
   </ul>
   <script>
     document.addEventListener('DOMContentLoaded', function() {

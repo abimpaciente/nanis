@@ -16,8 +16,8 @@ class ViewPanelControlController extends Controller
     }
 
    public function store(Request $request){
-        $usuario = Usuario::where('id', session('id'))->where('status', '1')->get();
-        if(session('authenticated') && $usuario->count()){
+        // $usuario = Usuario::where('id', session('id'))->where('status', '1')->get();
+        if(session('authenticated')){
             switch ($request->view) 
             {
                 case 'mis_datos':

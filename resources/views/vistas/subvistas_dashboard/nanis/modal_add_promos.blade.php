@@ -69,9 +69,13 @@ function b64toBlob(b64Data, contentType, sliceSize)
     <select id="selectServicio">
       <label>Servicio</label>
         <option value="" disabled selected>Seleccione Servicio</option>
-        <option value="Eventual">Eventual</option>
-        <option value="Semanal">Semanal</option>
-        <option value="Especial">Especial</option>
+        <?php
+         foreach($servicios as $clave => $valor)  {             
+                ?>
+                <option value="{{$clave}}">{{$valor}}</option>
+                <?php
+         }
+        ?>
       </select>
   </div>
   <div class="input-field col s12 l6">

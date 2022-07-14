@@ -1,16 +1,5 @@
 
 <meta name="csrf-token-servicios_<?php echo str_replace(' ', '_',$orden); ?>" content="{{ csrf_token() }}">
-<style>
-    .material-tooltip > .backdrop {
-    background-color:#cc0000;
-}
-
-.material-tooltip > span {
-    font-size:22px;
-    padding:10px;
-}
-</style>
-
 <div class="col s12">
     <div class="row" style="display: flex;
     justify-content: center;
@@ -34,8 +23,8 @@
             <div class="row">
                 <div class="input-field col s12 m12 l12">
                     @csrf
-                    <input id="busqueda" type="text" class="validate" onkeyup="searchServicios('{{ route('servicios_search') }}')">
-                    <label for="busqueda">Busqueda</label>
+                    <input id="busqueda_<?php echo str_replace(' ', '_',$orden); ?>" type="text" class="validate" onkeyup="searchServicios('{{ route('servicios_search') }}')">
+                    <label for="busqueda_<?php echo str_replace(' ', '_',$orden); ?>">Busqueda</label>
                 </div>
             </div>
         </div>
@@ -45,11 +34,11 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Folio</th>
+                        <!-- <th>Folio</th> -->
+                        <th>Cliente</th>
                         <th>Comision</th>
                         <th>Total</th>
                         <th>Servicio</th>
-                        <th>Cliente</th>
                         <th>Nani</th>
                         <th>Carrera</th>
                         <th>Pago</th>
@@ -62,16 +51,34 @@
                         @foreach ($servicios as $servicio)
                         <tr>
                             <td></td>
-                            <td style="font-weight: bold">{{$servicio['folio']}}</td>
+                            <!-- <td style="font-weight: bold">{{$servicio['folio']}}</td> -->
+                            <td>{{$servicio['nombre_cliente']}}</td>
                             <td>{{$servicio['comision']}}</td>
                             <td>{{$servicio['total']}}</td>
-                            <td>{{$servicio['tipo_servicio']}}</td>
-                            <td>{{$servicio['nombre_cliente']}}</td>
+                            <td>
+                            <?php
+                                foreach($tipos as $clave => $valor)  { 
+                                    if ($servicio['tipo_servicio']==$clave) {?>
+                                        {{$valor}}
+                                    <?php 
+                                    }
+                                }
+                            ?>
+                            </td>
                             <td>{{$servicio['nanny_nombre']}}</td>
                             <td>{{$servicio['nanny_carrera']}}</td>
                             <td>{{$servicio['forma_pago']}}</td>
                             <td>{{$servicio['fecha']}}</td>
-                            <td>{{$servicio['status']}}</td>
+                            <td>
+                            <?php
+                                foreach($procesos as $clave => $valor)  { 
+                                    if ($servicio['status']==$clave) {?>
+                                        {{$valor}}
+                                    <?php 
+                                    }
+                                }
+                            ?>
+                            </td>
 
                             <td><a class="tooltipped waves-effect waves-light btn-small modal-trigger light-blue darken-1" href="#editservicio" onclick="EditServicio('{{$servicio['id_servicio']}}')" data-position="bottom" data-tooltip="Editar" data-outDuration="50"><i class="material-icons">edit</i></a></td>
     
@@ -97,10 +104,11 @@
 <script>
     function searchServicios(url)
     {
-        var value = $('#busqueda').val();
+        var value = $('#busqueda_<?php echo str_replace(' ', '_',$orden); ?>').val();
         var data = new FormData();
         data.append('_token', $("meta[name='csrf-token-servicios_<?php echo str_replace(' ', '_',$orden); ?>']").attr("content"));
         data.append('busqueda',value);
+        data.append('status','<?php echo str_replace(' ', '_',$orden); ?>');
         $.ajax({
             url:'{{route('servicios_search')}}',
             type:'POST',

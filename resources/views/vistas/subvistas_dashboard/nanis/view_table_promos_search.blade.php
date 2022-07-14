@@ -4,7 +4,16 @@
     <!-- <td style="font-weight: bold">{{$promo['id']}}</td> -->
     <td>{{$promo['promo_code']}}</td>
     <td>{{$promo['descripcion']}}</td>
-    <td class="center-align">{{$promo['servicio']}}</td>
+    <td class="center-align">
+    <?php
+         foreach($servicios as $clave => $valor)  { 
+            if ($promo['servicio']==$clave) {?>
+                {{$valor}}
+               <?php 
+            }
+         }
+    ?>
+    </td>
     <td>{{$promo['discount']}}</td>
     <td>{{$promo['fecha_inicio']}}</td>
     <td>{{$promo['fecha_fin']}}</td>
@@ -22,17 +31,17 @@
     ?>                            
     </td>
     <td>
-    <?php
-    if ($promo['status_promo']=='1') {
-    ?>
-        <a class="tooltipped waves-effect waves-light btn-small modal-trigger orange darken-2" href="#bajapromo" onclick="downOutPromo('{{$promo['promo_code']}}')"  data-position="bottom" data-tooltip="Dar de baja"><i class="material-icons">remove</i></a>
-    <?php
-    }else{
-    ?>
-        <a class="tooltipped waves-effect waves-light btn-small modal-trigger green darken-2" href="#altapromo" onclick="downOutPromo('{{$promo['promo_code']}}')"  data-position="bottom" data-tooltip="Dar de alta"><i class="material-icons">add</i></a>
-    <?php
-    }
-    ?>
+        <?php
+        if ($promo['status_promo']=='1') {
+        ?>
+            <a class="tooltipped waves-effect waves-light btn-small modal-trigger orange darken-2" href="#bajapromo" onclick="downOutPromo('{{$promo['promo_code']}}')"  data-position="bottom" data-tooltip="Dar de baja"><i class="material-icons">remove</i></a>
+        <?php
+        }else{
+        ?>
+            <a class="tooltipped waves-effect waves-light btn-small modal-trigger green darken-2" href="#altapromo" onclick="downOutPromo('{{$promo['promo_code']}}')"  data-position="bottom" data-tooltip="Dar de alta"><i class="material-icons">add</i></a>
+        <?php
+        }
+        ?>
     </td>
     <td><a class="tooltipped waves-effect waves-light btn-small modal-trigger light-blue darken-1" href="#editpromo" onclick="EditPromo('{{$promo['promo_code']}}')" data-position="bottom" data-tooltip="Editar"><i class="material-icons">edit</i></a></td>
 </tr>

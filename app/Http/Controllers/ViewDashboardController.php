@@ -20,8 +20,8 @@ class ViewDashboardController extends Controller
    }
 
    public function store(Request $request){
-        $usuario = Usuario::where('id', session('id'))->where('status', '1')->get();
-        if(session('authenticated') && $usuario->count()){
+        // $usuario = Usuario::where('id', session('id'))->where('status', '1')->get();
+        if(session('authenticated')){
             switch ($request->view) 
             {
                 case 'inicio':
@@ -139,7 +139,9 @@ class ViewDashboardController extends Controller
 
             $response = Http::Post('http://api.mundomagiconannys.com/get_all_promos')->collect();
             $promos = $response;
-            return view('vistas.bloques_dasboard.promos',compact('promos'),compact('tipo'));
+            $response = Http::Post('http://api.mundomagiconannys.com/get_list_servicios')->collect();
+            $servicios = $response;
+            return view('vistas.bloques_dasboard.promos',compact('tipo','promos','servicios'));
         }
         return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
     }
@@ -231,17 +233,17 @@ class ViewDashboardController extends Controller
 
     public function CheckSession()
     {
-        $usuario = Usuario::where('id', session('id'))->where('status', '1')->get();
-        if($usuario->count()){
+        // $usuario = Usuario::where('id', session('id'))->where('status', '1')->get();
+        // if($usuario->count()){
             if(session('authenticated')){            
                 return 1;
             }else{
                 return 0;
             }
-        }else{
-            $this->logout();
-            return 2;
-        }
+        // }else{
+        //     $this->logout();
+        //     return 2;
+        // }
     }
 
     public function getClima(Request $request)

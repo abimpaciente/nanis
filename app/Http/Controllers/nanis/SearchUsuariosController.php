@@ -45,7 +45,7 @@ class SearchUsuariosController extends Controller
                      'fecha_fin' => $request->fecha_fin,
                  ]);
             }
-            return collect($response->json()['message']);
+            return $response['message'];
         }else{
             return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
         }
@@ -105,6 +105,32 @@ class SearchUsuariosController extends Controller
         return $response;
     }
 
+    public function changeStatusSwitch(Request $request)
+    {
+        $response = "";
+        $message = "";
+        if($request->status=='1'){
+            $message = "prender";
+        }else{
+            $message = "apagar";
+        }
+        $id = $request->id;
+        $status = $request->status;
+        if($request->id){            
+            $response = Http::post('http://api.mundomagiconannys.com/main_switch?id='.$id.'&main_switch='.$status);
+            if($response->json()['response']){
+                $response = "Funcion de ".$message." con exito";
+            }else{
+                $response = "Error al ".$message;
+            }
+        }else{
+            $response = "Falta switch a da de ".$message;
+        }   
+                
+        return $response;
+    }
+
+
 
     public function deleteOrden(Request $request)
     {
@@ -123,14 +149,19 @@ class SearchUsuariosController extends Controller
                     || strpos($item['servicio'], $term) !== false;
                 });
 
+                $response = Http::Post('http://api.mundomagiconannys.com/get_list_servicios')->collect();
+                $servicios = $response;
+                
+
             }else{
                 $promos = [];
             }
 
-            return view('vistas.subvistas_dashboard.nanis.view_table_promos_search', compact('promos'));
+            return view('vistas.subvistas_dashboard.nanis.view_table_promos_search', compact('promos'), compact('servicios'));
         }
         return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
     }
+    
     public function promoEdit(Request $request)
     {
         if(session('authenticated')){
@@ -158,7 +189,7 @@ class SearchUsuariosController extends Controller
                      'fecha_fin' => $request->fecha_fin,
                  ]);
             }
-            return collect($response->json()['message']);
+            return $response['message'];
         }else{
             return redirect()->route('login.index')->with('errorMessageDuration', 'Sesión finalizada');
         }
@@ -168,10 +199,17 @@ class SearchUsuariosController extends Controller
         $id_promo = $request->id_promo;
         $promos = Http::Post('http://api.mundomagiconannys.com/get_all_promos')->collect();
         $promos = $promos->whereIn('promo_code', $id_promo);
-        return view('vistas.subvistas_dashboard.nanis.modal_edit_promos',compact('promos'));
+
+        $response = Http::Post('http://api.mundomagiconannys.com/get_list_servicios')->collect();
+        $servicios = $response;
+        
+        return view('vistas.subvistas_dashboard.nanis.modal_edit_promos',compact('promos'),compact('servicios'));
     }
     public function addModalPromo()
     {
-        return view('vistas.subvistas_dashboard.nanis.modal_add_promos');
+        $response = Http::Post('http://api.mundomagiconannys.com/get_list_servicios')->collect();
+        $servicios = $response;
+        
+        return view('vistas.subvistas_dashboard.nanis.modal_add_promos',compact('servicios'));
     } 
 }

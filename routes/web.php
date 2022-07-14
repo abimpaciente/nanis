@@ -16,6 +16,7 @@ use App\Http\Controllers\ViewPanelControlController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\nanis\SearchOrdenesController;
 use App\Http\Controllers\nanis\SearchUsuariosController;
+use App\Http\Controllers\nanis\ViewConfigController;
 
 Route::get('/', function () {
     return view('index');
@@ -37,6 +38,7 @@ Route::post('ordens_search', [SearchOrdenesController::class, 'autosearch'])->na
 Route::post('ordens_addmodal', [SearchOrdenesController::class, 'addModal'])->name('ordens_addmodal');
 Route::post('servicios_addmodal', [SearchOrdenesController::class, 'addModal'])->name('servicios_addmodal');
 Route::post('servicios_update', [SearchOrdenesController::class, 'changeStatus'])->name('servicios_update');
+Route::post('config_update', [SearchOrdenesController::class, 'changeStatusConfig'])->name('config_update');
 Route::post('servicios_editmodal', [SearchOrdenesController::class, 'editModal'])->name('servicios_editmodal');
 Route::resource('ordens_insert', SearchOrdenesController::class);
 
@@ -46,10 +48,21 @@ Route::post('usuarios_addmodal', [SearchUsuariosController::class, 'addModal'])-
 Route::resource('promos_insert', SearchUsuariosController::class);
 Route::post('usuarios_change_status', [SearchUsuariosController::class, 'changeStatus'])->name('usuarios_change_status');
 Route::post('promo_change_status', [SearchUsuariosController::class, 'changeStatusPromo'])->name('promos_change_status');
+Route::post('switch_change_status', [SearchUsuariosController::class, 'changeStatusSwitch'])->name('switch_change_status');
 Route::post('promos_search', [SearchUsuariosController::class, 'promoAutoSearch'])->name('promos_search');
 Route::post('promos_update', [SearchUsuariosController::class, 'promoEdit'])->name('promos_update');
 Route::post('promos_editmodal', [SearchUsuariosController::class, 'editModalPromo'])->name('promos_editmodal');
 Route::post('promos_addmodal', [SearchUsuariosController::class, 'addModalPromo'])->name('promos_addmodal');
+
+// Config
+Route::resource('config', ViewConfigController::class);
+// Route::resource('empleados_insert', ViewConfigController::class);
+Route::post('empleados_insert', [ViewConfigController::class, 'save'])->name('empleados_insert');
+Route::post('empleados_editmodal', [ViewConfigController::class, 'editModalEmpleado'])->name('empleados_editmodal');
+Route::post('empleados_addmodal', [ViewConfigController::class, 'addModalEmpleado'])->name('empleados_addmodal');
+Route::post('empleados_search', [ViewConfigController::class, 'empleadoAutoSearch'])->name('empleados_search');
+Route::post('empleados_update', [ViewConfigController::class, 'empleadoEdit'])->name('empleados_update');
+Route::post('empleados_change_status', [ViewConfigController::class, 'changeStatusEmpleado'])->name('empleados_change_status');
 
 //Search Alumnos Views
 Route::post('alumnos_search', [SearchAlumnosController::class, 'autosearch'])->name('alumnos_search');

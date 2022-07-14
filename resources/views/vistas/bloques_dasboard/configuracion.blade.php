@@ -1,197 +1,64 @@
-{{-- <style>
-  .tabs .tab a {
-  color: rgba(38, 166, 154, 0.7);
-  /*Custom Text Color*/
-}
 
-.tabs .tab a:hover {
-  color:#26a69a;
-  /*Custom Color On Hover*/
-}
-
-.tabs .tab a:focus.active {
-  color:#26a69a;
-  /*Custom Text Color While Active*/
-  background-color: rgba(38, 166, 154, 0.2);
-  /*Custom Background Color While Active*/
-}
-
-.tabs .indicator {
-  background-color:#26a69a;
-  /*Custom Color Of Indicator*/
-}
-</style> --}}
-
-<style>
-.table-responsive {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-} 
-   
-   #tabOrdenes{
-    position: fixed; 
-    width:79%; 
-    z-index:2;
-  }
-   /* Small devices (portrait tablets and large phones, 600px and up) */
-   @media only screen and (min-width: 100px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-
-   /* Small devices (portrait tablets and large phones, 600px and up) */
-   @media only screen and (min-width: 200px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-   /* Small devices (portrait tablets and large phones, 600px and up) */
-   @media only screen and (min-width: 300px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-   /* Small devices (portrait tablets and large phones, 600px and up) */
-   @media only screen and (min-width: 400px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 500px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 700px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 800px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-  
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 900px) 
-  {
-    #tabOrdenes{
-      width: 95%;
-    }
-   
-  }
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 1000px) 
-  {
-    #tabOrdenes{
-      width: 75%;
-    }
-  }
-  /* Medium devices (landscape tablets, 768px and up) */
-  @media only screen and (min-width: 1100px) 
-  {
-    #tabOrdenes{
-      width: 70%;
-    }
-  }	
-  /* Large devices (laptops/desktops, 992px and up) */
-  @media only screen and (min-width: 1200px) 
-  { 
-    #tabOrdenes{
-      width: 70%;
-    }
-  } 
-  @media only screen and (min-width: 1300px) 
-  { 
-    #tabOrdenes{
-      width: 75%;
-    }
-  } 
-
-  @media only screen and (min-width: 1400px) 
-  { 
-    #tabOrdenes{
-      width: 80%;
-    }
-  } 
-
-  @media only screen and (min-width: 1500px) 
-  { 
-    #tabOrdenes{
-      width: 80%;
-    }
-  } 
-
-  @media only screen and (min-width: 1600px) 
-  { 
-    #tabOrdenes{
-      width: 80%;
-    }
-  } 
- 
-  
-  
-  </style>
-<meta name="csrf-token-control_escolar" content="{{ csrf_token() }}">
-
+<meta name="csrf-token-config" content="{{ csrf_token() }}">
 <ul id="tabOrdenes" class="tabs tabs-fixed tab-demo z-depth-1" style="">
     <li class="tab col s6"><a class="active red-text text-darken-4" href="#control-swipe-1" onclick="ViewConfig('settings', 'control-swipe-1')">Settings</a></li>
     <li class="tab col s6"><a class="red-text text-darken-4" href="#control-swipe-2" onclick="ViewConfig('empleados', 'control-swipe-2')">Empleados</a></li>
 </ul>
-<div id="control-swipe-1" class="col s12" style="margin-top: 50px;">
+<div id="control-swipe-1" class="col s12">
 </div>
-<div id="control-swipe-2" class="col s12" style="margin-top: 50px;">
+<div id="control-swipe-2" class="col s12">
 </div>
-
-
   <script>
    $(document).ready(function(){
     $('.tabs').tabs();
     ViewConfig('settings', 'control-swipe-1');
-  });
-   </script>
 
-<script>
+    $('.tooltipped').tooltip(); 
+
+  });
+
+
+  function searchEmpleados(url)        
+  {
+      var value = $('#first_name').val();
+      var data = new FormData();
+      data.append('_token', $("meta[name='csrf-token-config']").attr("content"));
+      data.append('busqueda',value);
+      $.ajax({
+          url:url,
+          type:'POST',
+          contentType:false,
+          data:data,
+          dataType: "html",
+          processData:false,
+          cache:false,
+          beforeSend: function(){
+          },
+          error: function(request, status, error)
+          {
+          console.log(request);
+          },
+          success:function (data) {
+
+              $('#table_content_empleados').html(data)
+              updateTable('table_empleados', 'table_pager_empleados');
+          },
+          complete: function (XMLHttpRequest, textStatus) {
+              var headers = XMLHttpRequest.getAllResponseHeaders();
+              /* console.log(headers) */
+          }
+      })      
+  }
 
 function ViewConfig(view, id){
 
   if(view!='')
   {
     var data = new FormData();
-    data.append('_token', $("meta[name='csrf-token-control_escolar']").attr("content"));
+    data.append('_token', $("meta[name='csrf-token-config']").attr("content"));
     data.append('view',view);
     $.ajax({
-      url:'{{route('control_escolar.store')}}',
+      url:'{{route('config.store')}}',
       type:'POST',
       contentType:false,
       data:data,
@@ -300,7 +167,8 @@ function updateTable(table, id_pager){
       hidePageNumbers:false,
       perPage:5
   });
-
-  $('.tooltipped').tooltip(); 
 }
 </script>
+
+@include('modals.baja_switch_modal')
+@include('modals.alta_switch_modal')

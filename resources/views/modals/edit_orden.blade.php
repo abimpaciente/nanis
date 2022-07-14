@@ -66,6 +66,7 @@ function updateServicio(url){
     var folio = $('#txtFolio').val();
     var nombre = $('#selectEstado_update').val();
 
+    var data = new FormData();
     data.append('folio',folio);
     data.append('_token', $("meta[name='csrf-token']").attr("content"));
     data.append('status_pedido',nombre);

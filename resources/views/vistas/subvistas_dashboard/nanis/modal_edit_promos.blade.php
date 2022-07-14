@@ -1,5 +1,4 @@
 @foreach ($promos as $promo)
-
 <div class="col s12 center-align">
     <input id="foto_front" type="file" accept="image/*" style="display: none;" />
     <div class="image-upload_update">
@@ -97,28 +96,26 @@
 
     
   <div class="input-field col s12 m12 l4">
-    <input id="codigo_text" type="text" class="validate" disabled name="text" onkeyup="this.value = this.value.toUpperCase()" value="{{$promo['promo_code']}}">
-    <label for="codigo_text">Codigo</label>
+    <input id="codigo_edit_text" type="text" class="validate" disabled name="text" onkeyup="this.value = this.value.toUpperCase()" value="{{$promo['promo_code']}}">
+    <label for="codigo_edit_text">Codigo</label>
   </div>
   <div class="input-field col s12 l4">
-    <input id="descuento_text" type="number" name="text" value="{{$promo['discount']}}" class="validate">
-    <label for="descuento_text">Descuento</label>
+    <input id="descuento_edit_text" type="number" name="text" value="{{$promo['discount']}}" class="validate">
+    <label for="descuento_edit_text">Descuento</label>
   </div>
   <div class="input-field col s12 l4">
-    <select id="selectServicio">
+    <select id="selectServicio_edit">
       <label>Servicio</label>
         <option value="" disabled selected>Seleccione Servicio</option>
         <?php
-         $arrayServicioName = array('Eventual', 'Semanal','Especial');
-         $arrayServicioValue = array('Eventual', 'Semanal','Especial');
-         for ($i=0; $i < count($arrayServicioName); $i++) { 
-            if ($promo['servicio']==$arrayServicioValue[$i]) {
+         foreach($servicios as $clave => $valor)  { 
+            if ($promo['servicio']==$clave) {
                 ?>
-                <option value="{{$arrayServicioValue[$i]}}" selected>{{$arrayServicioName[$i]}}</option>
+                <option value="{{$clave}}" selected>{{$valor}}</option>
                 <?php
             }else{
                 ?>
-                <option value="{{$arrayServicioValue[$i]}}">{{$arrayServicioName[$i]}}</option>
+                <option value="{{$clave}}">{{$valor}}</option>
                 <?php
             }
          }
@@ -126,16 +123,16 @@
       </select>
   </div>
   <div class="input-field col s12 l6">
-    <input id="fecha_inicio" type="text" name="text" value="{{$promo['fecha_inicio']}}" class="validate datepicker">
-    <label for="fecha_inicio">Fecha de Inicio</label>
+    <input id="fecha_inicio_edit_text" type="text" name="text" value="{{$promo['fecha_inicio']}}" class="validate datepicker">
+    <label for="fecha_inicio_edit_text">Fecha de Inicio</label>
   </div>
   <div class="input-field col s12 l6">
-    <input id="fecha_fin" type="text" name="text" value="{{$promo['fecha_fin']}}" class="validate datepicker">
-    <label for="fecha_fin">Fecha de Fin</label>
+    <input id="fecha_fin_edit_text" type="text" name="text" value="{{$promo['fecha_fin']}}" class="validate datepicker">
+    <label for="fecha_fin_edit_text">Fecha de Fin</label>
   </div>
   <div class="input-field col s12 m12">
-    <input id="descripcion_text" type="text" name="text" value="{{$promo['descripcion']}}" class="validate" onkeyup="capitalizarLetter(this.value, this)">
-    <label for="descripcion_text">Descripcion</label>
+    <input id="descripcion_edit_text" type="text" name="text" value="{{$promo['descripcion']}}" class="validate" onkeyup="capitalizarLetter(this.value, this)">
+    <label for="descripcion_edit_text">Descripcion</label>
   </div>
   @endforeach  
 
